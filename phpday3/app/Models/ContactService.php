@@ -77,6 +77,15 @@ class ContactService
     {
         Log::info('Deleting the user profile for user with given input: '.$request->name);
 
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:50|min:2',
+        ]);
+
+        if ($validator->fails()) {
+            echo $validator->errors();
+            return response(["Message" => "Enter credentials properly"]);
+        }
+
         if (Contact::where('name', $request->get('name'))->exists()) {
 
             $contact = Contact::where('name', $request->get('name'))->get();
@@ -99,6 +108,15 @@ class ContactService
     {
         Log::info('Deleting the user profile for user with email: '.$request->email);
 
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            echo $validator->errors();
+            return response(["Message" => "Enter credentials properly"]);
+        }
+
         if (Contact::where('email', $request->get('email'))->exists()) {
 
             $contact = Contact::where('email', $request->get('email'))->get();
@@ -119,6 +137,15 @@ class ContactService
     public function deleteUserByMobile(Request $request)
     {
         Log::info('Deleting the user profile for user with mobile: '.$request->mobile);
+
+        $validator = Validator::make($request->all(), [
+            'mobile' => 'required|gt:999999999|lt:10000000000',
+        ]);
+
+        if ($validator->fails()) {
+            echo $validator->errors();
+            return response(["Message" => "Enter credentials properly"]);
+        }
 
         if (Contact::where('mobile', $request->get('mobile'))->exists()) {
 
