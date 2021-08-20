@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::post('contact',[UserController::class,'insertUser']);
 Route::get('contact/',[UserController::class,'getUserByInput']);
-Route::get('contact/',[UserController::class,'getUsers']);
+Route::get('contacts/',[UserController::class,'getUsers']);
 Route::delete('contact/byName',[UserController::class,'deleteUserByName']);
 Route::delete('contact/byEmail',[UserController::class,'deleteUserByEmail']);
 Route::delete('contact/byMobile',[UserController::class,'deleteUserByMobile']);

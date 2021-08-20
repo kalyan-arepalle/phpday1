@@ -45,17 +45,17 @@ class ContactService
 
         if (Contact::where('name', $request->query('name'))->exists()) {
 
-            $contact = DB::table('contacts')->select('name','mobile')->where('name', $request->get('name'))->get();
+            $contact = Contact::where('name','=', $request->get('name'))->orderBy('id','desc')->get();
             return response(["Users with given name" => $contact]);
         }
         else if (Contact::where('email', $request->get('email'))->exists()) {
 
-            $contact = DB::table('contacts')->select('name','mobile')->where('email', $request->get('email'))->get();
+            $contact = Contact::where('email', $request->get('email'))->get();
             return response(["User with given email" => $contact]);
         }
         else if (Contact::where('mobile', $request->get('mobile'))->exists()) {
 
-            $contact = DB::table('contacts')->select('name','mobile')->where('mobile', $request->get('mobile'))->get();
+            $contact = Contact::where('mobile', $request->get('mobile'))->get();
             return response(["User with given mobile number" => $contact]);
         }
 
@@ -68,7 +68,7 @@ class ContactService
     {
         Log::info('Showing the user profiles for all the users');
 
-        $users = DB::table('contacts')->select('name','mobile')->get();
+        $users = DB::table('contacts')->select('name','mobile')->orderBy('id','desc')->get();
 
         return response(["List of users in db" => $users]);
     }
