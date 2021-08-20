@@ -21,22 +21,22 @@ class UserControllerTest extends TestCase
 
     public function test_getUserByInput()
     {
-        $response = $this->json('GET','/contact/?',[],['name'=>'abc']);
+        $response = $this->json('GET','/contact/?name=abc');
 
         $response->assertStatus(200);
 
-        $response = $this->json('GET','/contact/?',[],['email=aew@pqrs.com']);
+        $response = $this->json('GET','/contact/?email=a12@paw.com');
 
         $response->assertStatus(200);
 
-        $response = $this->json('GET','/contact/?',[],['mobile=1241241241']);
+        $response = $this->json('GET','/contact/?mobile=1241241231');
 
         $response->assertStatus(200);
     }
 
     public function test_getUsers()
     {
-        $response = $this->get('/contact');
+        $response = $this->get('/contacts');
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
